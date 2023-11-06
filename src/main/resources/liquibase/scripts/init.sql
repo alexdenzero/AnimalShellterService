@@ -10,7 +10,7 @@ CREATE TABLE shelter (
     direction_path_file VARCHAR,
     shelter_type VARCHAR
 );
--- liquibase formatted sql
+
 
 
 CREATE TABLE request (
@@ -20,7 +20,7 @@ CREATE TABLE request (
     request_text VARCHAR,
     PRIMARY KEY(id)
 );
---liquibase formatted sql
+
 
 
 CREATE TABLE users (

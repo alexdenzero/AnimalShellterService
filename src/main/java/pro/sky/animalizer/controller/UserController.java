@@ -15,7 +15,6 @@ import pro.sky.animalizer.service.UserService;
 
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -66,7 +65,7 @@ public class UserController {
         return userService.findUserById(id);
     }
 
-    @GetMapping("/{telegramId}")
+    @GetMapping("/by{telegramId}")
     public User findByTelegramId(@PathVariable long telegramId) {
         return userService.findUserByTelegramId(telegramId);
     }
