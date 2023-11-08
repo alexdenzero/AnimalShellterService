@@ -7,17 +7,25 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pro.sky.animalizer.model.User;
+import pro.sky.animalizer.repositories.UserRepository;
 import pro.sky.animalizer.service.UserService;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
+    @Autowired
+    private UserRepository userRepository;
     private final UserService userService;
 
     public UserController(UserService userService) {
@@ -37,9 +45,9 @@ public class UserController {
                             }
                     )
             })
-    @GetMapping
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    @GetMapping("/{users}")
+    public Page<User> getAllUsers(@RequestParam Pageable pageable) {
+        return userRepository.findAll(pageable);
 
     }
 
@@ -72,7 +80,7 @@ public class UserController {
 
     @Operation(
             summary = "Добавление пользователя в базу данных",
-            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            requestBody = @RequestBody(
                     description = "Добавляемый пользователь",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE,
