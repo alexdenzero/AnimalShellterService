@@ -2,6 +2,8 @@ package pro.sky.animalizer.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pro.sky.animalizer.exceptions.UserNotFoundException;
 import pro.sky.animalizer.model.User;
@@ -38,9 +40,9 @@ public class UserService {
         return userRepository.findByTelegramId(telegramId);
     }
 
-    public List<User> getAllUsers() {
+    public Page<User> getAllUsers(Pageable pageable) {
         logger.info("start method getAllUserFromUserRepository");
-        return userRepository.findAll();
+        return userRepository.findAll(pageable);
     }
 
     /**

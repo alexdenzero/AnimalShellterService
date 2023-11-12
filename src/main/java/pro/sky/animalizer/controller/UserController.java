@@ -24,8 +24,6 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    private UserRepository userRepository;
     private final UserService userService;
 
     public UserController(UserService userService) {
@@ -47,8 +45,7 @@ public class UserController {
             })
     @GetMapping("/{users}")
     public Page<User> getAllUsers(@RequestParam Pageable pageable) {
-        return userRepository.findAll(pageable);
-
+        return (Page<User>) userService.getAllUsers(pageable);
     }
 
     @Operation(
