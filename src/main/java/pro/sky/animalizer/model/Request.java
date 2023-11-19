@@ -1,10 +1,7 @@
 package pro.sky.animalizer.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -13,6 +10,7 @@ import java.util.Objects;
  * Класс Request для хранения в БД и обработки запросов телеграмм пользователей
  */
 @Entity
+@Table(name = "request")
 public class Request {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -34,8 +34,16 @@ public class ShelterService {
         return repository.findAll();
     }
 
+/*    public Shelter createShelter(Shelter shelter) {
+        logger.info("createShelter method has been invoked");
+        return repository.save(shelter);
+    }*/
+
     public Shelter createShelter(Shelter shelter) {
         logger.info("createShelter method has been invoked");
+        if (shelter.getAddress() == null || shelter.getSecurityPhoneNumber() == null || shelter.getSchedule() == null) {
+            throw new IllegalArgumentException("Address, Security Phone Number, and Schedule are required fields.");
+        }
         return repository.save(shelter);
     }
 

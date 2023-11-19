@@ -102,7 +102,7 @@ public class UserController {
 
     @Operation(
             summary = "Изменение пользователя в базе данных по искомому идентификатору",
-            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            requestBody = @RequestBody(
                     description = "Отредактированный пользователь",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE,

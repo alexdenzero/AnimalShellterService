@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import pro.sky.animalizer.model.Shelter;
 import pro.sky.animalizer.service.ShelterService;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 import java.util.Collection;
 
@@ -64,7 +65,7 @@ public class ShelterController {
 
     @Operation(
             summary = "Добавление приюта в базу данных",
-            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            requestBody = @RequestBody(
                     description = "Добавляемый приют",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE,
@@ -89,7 +90,7 @@ public class ShelterController {
 
     @Operation(
             summary = "Изменение приюта в базе данных по искомому идентификатору",
-            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            requestBody = @RequestBody(
                     description = "Отредактированный приют",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE,
