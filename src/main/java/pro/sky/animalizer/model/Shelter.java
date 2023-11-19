@@ -1,24 +1,34 @@
 package pro.sky.animalizer.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 /**
  * Класс-модель, описывающая приют.
  */
 @Entity
+@Table(name = "shelter")
 public class Shelter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "address")
     private String address;
+
+    @Column(name = "security_phone_number")
     private String securityPhoneNumber;
+
+    @Column(name = "schedule")
     private String schedule;
+
+    @Column(name = "safety_measures")
     private String safetyMeasures;
+
+    @Column(name = "direction_path_file")
     private String directionPathFile;
+
+    @Column(name = "shelter_type")
     private String shelterType;
 
     public Shelter() {

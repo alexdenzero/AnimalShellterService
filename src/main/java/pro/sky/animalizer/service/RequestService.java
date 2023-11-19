@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import pro.sky.animalizer.model.Request;
 import pro.sky.animalizer.repositories.RequestRepository;
+import pro.sky.animalizer.repositories.ShelterRepository;
 
 import java.util.Collection;
 
@@ -21,11 +22,10 @@ import static java.lang.Boolean.TRUE;
 public class RequestService {
     private static final Logger logger = LoggerFactory.getLogger(RequestService.class);
 
-    @Autowired
-    private RequestRepository requestRepository;
+    private final RequestRepository repository;
 
-    public RequestService(RequestRepository requestRepository) {
-        this.requestRepository = requestRepository;
+    public RequestService(RequestRepository repository) {
+        this.repository = repository;
     }
 
 
@@ -38,7 +38,7 @@ public class RequestService {
      */
     public Request saveRequest(Request request) {
         logger.info("Was invoked method for save request");
-        return requestRepository.save(request);
+        return repository.save(request);
     }
 
     /**
@@ -49,7 +49,7 @@ public class RequestService {
      */
     public void deleteRequest(Long id) {
         logger.info("Was invoked method for delete request by id" + id);
-        requestRepository.deleteById(id);
+        repository.deleteById(id);
     }
 
     /**
@@ -61,7 +61,7 @@ public class RequestService {
      */
     public Request editRequest(Request request) {
         logger.info("Was invoked method for edit request");
-        return requestRepository.save(request);
+        return repository.save(request);
     }
 
     /**
@@ -72,7 +72,7 @@ public class RequestService {
      */
     public Collection<Request> getAllRequests() {
         logger.info("Was invoked method for find all requests");
-        return requestRepository.findAll();
+        return repository.findAll();
     }
 
     /**
@@ -85,7 +85,7 @@ public class RequestService {
      */
     public Collection<Request> getAllRequestsByChatId(Long chatId) {
         logger.info("Was invoked method for find all requests by tg_chat_id");
-        return requestRepository.findAllRequestsByChatId(chatId);
+        return repository.findAllRequestsByChatId(chatId);
     }
 
     /**
@@ -98,7 +98,7 @@ public class RequestService {
     public boolean checkIfNewUser(Long chatId) {
         logger.info("Was invoked method for check if new user");
 
-        if (requestRepository.countRequestsByChatId(chatId) == 0) {
+        if (repository.countRequestsByChatId(chatId) == 0) {
             return TRUE;
         } else {
             return FALSE;
