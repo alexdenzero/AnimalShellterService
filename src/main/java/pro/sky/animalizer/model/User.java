@@ -12,13 +12,23 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "telegramId")
     private Long telegramId;
+
+    @Column(name = "telegramNick")
     private String telegramNick;
+
+    @Column(name = "fullName")
     private String fullName;
+
+    @Column(name = "phoneNumber")
     private String phoneNumber;
+
+    @Column(name = "carNumber")
     private String carNumber;
 
-    public User() {
+    public User(long l, long l1, String oldNick, String oldName, String number, String old123) {
     }
 
 

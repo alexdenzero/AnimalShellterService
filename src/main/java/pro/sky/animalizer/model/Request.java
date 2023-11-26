@@ -15,9 +15,13 @@ public class Request {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;  // уникальный id обращения
-    private Long chatId; // id телеграмм чата
-    private LocalDateTime requestTime;  // дата и время обращения
 
+    @Column(name = "chatId")
+    private Long chatId; // id телеграмм чата
+
+    @Column(name = "requestTime")
+    private LocalDateTime requestTime;  // дата и время обращения
+    @Column(name = "requestText")
     private String requestText;  // текст обращения - с сутью обращения
 
     public Request(Long chatId, LocalDateTime requestTime, String requestText) {

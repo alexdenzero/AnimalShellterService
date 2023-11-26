@@ -1,5 +1,6 @@
 package pro.sky.animalizer.service;
 
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,8 @@ import java.util.Optional;
  */
 @Service
 public class ShelterService {
+
+
     private static final Logger logger = LoggerFactory.getLogger(ShelterService.class);
     private final ShelterRepository repository;
 
@@ -39,7 +42,7 @@ public class ShelterService {
         return repository.save(shelter);
     }*/
 
-    public Shelter createShelter(Shelter shelter) {
+    public Shelter createShelter(@NotNull Shelter shelter) {
         logger.info("createShelter method has been invoked");
         if (shelter.getAddress() == null || shelter.getSecurityPhoneNumber() == null || shelter.getSchedule() == null) {
             throw new IllegalArgumentException("Address, Security Phone Number, and Schedule are required fields.");

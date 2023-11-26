@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import pro.sky.animalizer.model.Request;
+
 import static java.time.LocalDateTime.now;
 
 @SpringBootTest
@@ -71,6 +72,4 @@ public class RequestServiceTest {
         requestChatId = -1L;
         Assertions.assertThat(requestService.checkIfNewUser(requestChatId)).isEqualTo(true);
     }
-
-
 }

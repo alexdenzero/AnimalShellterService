@@ -13,26 +13,21 @@ public class Shelter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "address")
     private String address;
 
-    @Column(name = "security_phone_number")
     private String securityPhoneNumber;
 
-    @Column(name = "schedule")
     private String schedule;
 
-    @Column(name = "safety_measures")
     private String safetyMeasures;
 
-    @Column(name = "direction_path_file")
     private String directionPathFile;
 
-    @Column(name = "shelter_type")
-    private String shelterType;
+    private ShelterType shelterType;
 
     public Shelter() {
     }
+
 
     public Shelter(Long id, String address, String securityPhoneNumber, String schedule, String safetyMeasures, String directionPathFile, String shelterType) {
         this.id = id;
@@ -41,7 +36,7 @@ public class Shelter {
         this.schedule = schedule;
         this.safetyMeasures = safetyMeasures;
         this.directionPathFile = directionPathFile;
-        this.shelterType = shelterType;
+        this.shelterType = ShelterType.valueOf(shelterType);
     }
 
     public Long getId() {
@@ -92,12 +87,11 @@ public class Shelter {
         this.directionPathFile = directionPathFile;
     }
 
-    public String getShelterType() {
+    public ShelterType getShelterType() {
         return shelterType;
     }
 
-    public void setShelterType(String shelterType) {
-        this.shelterType = shelterType;
+    public void setShelterType(ShelterType shelterType) {
     }
 
     @Override
@@ -128,4 +122,5 @@ public class Shelter {
                 ", shelterType='" + shelterType + '\'' +
                 '}';
     }
+
 }

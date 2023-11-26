@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import pro.sky.animalizer.model.Shelter;
 import pro.sky.animalizer.service.ShelterService;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
 
@@ -18,6 +20,8 @@ import java.util.Collection;
 @RequestMapping("/shelter")
 public class ShelterController {
     private final ShelterService service;
+
+    private static final Logger logger = LoggerFactory.getLogger(ShelterService.class);
 
     public ShelterController(ShelterService service) {
         this.service = service;
@@ -85,6 +89,7 @@ public class ShelterController {
             })
     @PostMapping
     public Shelter createShelter(@RequestBody Shelter shelter) {
+        logger.info("Received Shelter data: {}", shelter);
         return service.createShelter(shelter);
     }
 
