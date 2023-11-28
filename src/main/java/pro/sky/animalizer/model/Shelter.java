@@ -1,28 +1,33 @@
 package pro.sky.animalizer.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 /**
  * Класс-модель, описывающая приют.
  */
 @Entity
+@Table(name = "shelter")
 public class Shelter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String address;
+
     private String securityPhoneNumber;
+
     private String schedule;
+
     private String safetyMeasures;
+
     private String directionPathFile;
-    private String shelterType;
+
+    private ShelterType shelterType;
 
     public Shelter() {
     }
+
 
     public Shelter(Long id, String address, String securityPhoneNumber, String schedule, String safetyMeasures, String directionPathFile, String shelterType) {
         this.id = id;
@@ -31,7 +36,7 @@ public class Shelter {
         this.schedule = schedule;
         this.safetyMeasures = safetyMeasures;
         this.directionPathFile = directionPathFile;
-        this.shelterType = shelterType;
+        this.shelterType = ShelterType.valueOf(shelterType);
     }
 
     public Long getId() {
@@ -82,12 +87,11 @@ public class Shelter {
         this.directionPathFile = directionPathFile;
     }
 
-    public String getShelterType() {
+    public ShelterType getShelterType() {
         return shelterType;
     }
 
-    public void setShelterType(String shelterType) {
-        this.shelterType = shelterType;
+    public void setShelterType(ShelterType shelterType) {
     }
 
     @Override
@@ -96,7 +100,9 @@ public class Shelter {
         if (o == null || getClass() != o.getClass()) return false;
         Shelter shelter = (Shelter) o;
         return Objects.equals(id, shelter.id) && Objects.equals(address, shelter.address)
-                && Objects.equals(securityPhoneNumber, shelter.securityPhoneNumber) && Objects.equals(schedule, shelter.schedule) && Objects.equals(safetyMeasures, shelter.safetyMeasures) && Objects.equals(directionPathFile, shelter.directionPathFile) && Objects.equals(shelterType, shelter.shelterType);
+                && Objects.equals(securityPhoneNumber, shelter.securityPhoneNumber) &&
+                Objects.equals(schedule, shelter.schedule) && Objects.equals(safetyMeasures, shelter.safetyMeasures)
+                && Objects.equals(directionPathFile, shelter.directionPathFile) && Objects.equals(shelterType, shelter.shelterType);
     }
 
     @Override
@@ -116,4 +122,5 @@ public class Shelter {
                 ", shelterType='" + shelterType + '\'' +
                 '}';
     }
+
 }
