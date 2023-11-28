@@ -26,6 +26,8 @@ import java.util.regex.Pattern;
 
 import pro.sky.animalizer.util.MenuUtil;
 
+import static pro.sky.animalizer.model.ButtonType.*;
+
 /**
  * Класс, уведомляемый о событии. <br>
  * Он должен быть зарегистрирован источником событий
@@ -39,6 +41,7 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
     private final ShelterService shelterService;
     private final Logger logger = LoggerFactory.getLogger(TelegramBotUpdatesListener.class);
     private final MenuUtil menuUtil;
+    private static ButtonType buttonType;
 
 
     public TelegramBotUpdatesListener(TelegramBot telegramBot, UserService userService, ShelterService shelterService, MenuUtil menuUtil) {
@@ -95,11 +98,11 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
             long chatId = callbackQuery.message().chat().id();
             String data = callbackQuery.data();
             Shelter catsShelter = shelterService.getAllShelters().stream()
-                    .filter(shelter -> shelter.getShelterType().equals(ShelterType.CAT))
+                    .filter(shelter -> shelter.getShelterType().equals(ShelterType.CATS_SHELTER))
                     .findFirst()
                     .orElseThrow(ShelterNotFoundException::new);
             Shelter dogsShelter = shelterService.getAllShelters().stream()
-                    .filter(shelter -> shelter.getShelterType().equals(ShelterType.DOG))
+                    .filter(shelter -> shelter.getShelterType().equals(ShelterType.DOGS_SHELTER))
                     .findFirst()
                     .orElseThrow(ShelterNotFoundException::new);
             switch (buttonType) {
