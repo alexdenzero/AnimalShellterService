@@ -2,5 +2,5 @@ package pro.sky.animalizer.model;
 
 
 public enum ShelterType {
-    CAT, DOG
+    DOGS_SHELTER, CATS_SHELTER;
 }
