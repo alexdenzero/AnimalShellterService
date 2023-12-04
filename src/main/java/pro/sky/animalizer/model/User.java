@@ -1,7 +1,9 @@
 package pro.sky.animalizer.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Класс-модель, описывающая User.
@@ -27,6 +29,9 @@ public class User {
 
     @Column(name = "carNumber")
     private String carNumber;
+
+    @OneToMany(mappedBy = "petOwner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Pet> pets = new HashSet<>();
 
     public User(long l, long l1, String oldNick, String oldName, String number, String old123) {
     }
