@@ -3,9 +3,12 @@ package pro.sky.animalizer.service;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pro.sky.animalizer.exceptions.ShelterNotFoundException;
 import pro.sky.animalizer.model.Shelter;
+import pro.sky.animalizer.model.User;
 import pro.sky.animalizer.repositories.ShelterRepository;
 
 import java.util.List;
@@ -16,7 +19,6 @@ import java.util.Optional;
  */
 @Service
 public class ShelterService {
-
 
     private static final Logger logger = LoggerFactory.getLogger(ShelterService.class);
     private final ShelterRepository repository;
@@ -32,15 +34,10 @@ public class ShelterService {
         return repository.findById(shelterId).orElseThrow(ShelterNotFoundException::new);
     }
 
-    public List<Shelter> getAllShelters() {
+    public Page<Shelter> getAllShelters(Pageable pageable) {
         logger.info("getAllShelters method has been invoked");
-        return repository.findAll();
+        return repository.findAll(pageable);
     }
-
-/*    public Shelter createShelter(Shelter shelter) {
-        logger.info("createShelter method has been invoked");
-        return repository.save(shelter);
-    }*/
 
     public Shelter createShelter(@NotNull Shelter shelter) {
         logger.info("createShelter method has been invoked");

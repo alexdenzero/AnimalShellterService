@@ -2,10 +2,12 @@ package pro.sky.animalizer.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pro.sky.animalizer.exceptions.PetNotFoundException;
 import pro.sky.animalizer.model.Pet;
+import pro.sky.animalizer.model.User;
 import pro.sky.animalizer.repositories.PetRepository;
 
 import java.util.List;
@@ -32,9 +34,9 @@ public class PetService {
         return petRepository.findById(petId).orElseThrow(PetNotFoundException::new);
     }
 
-    public List<Pet> getAllPet() {
+    public Page<Pet> getAllPet(Pageable pageable) {
         logger.info("getAllPets method has been invoked");
-        return petRepository.findAll();
+        return petRepository.findAll(pageable);
     }
 
     public Pet createPet(Pet pet) {

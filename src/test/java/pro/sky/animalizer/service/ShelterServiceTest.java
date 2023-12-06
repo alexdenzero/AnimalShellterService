@@ -2,6 +2,8 @@ package pro.sky.animalizer.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import pro.sky.animalizer.exceptions.ShelterNotFoundException;
 import pro.sky.animalizer.model.Shelter;
 
@@ -53,7 +55,7 @@ public class ShelterServiceTest {
         List<Shelter> mockShelters = List.of(new Shelter(), new Shelter());
         given(shelterRepository.findAll()).willReturn(mockShelters);
 
-        List<Shelter> result = shelterService.getAllShelters();
+        Page<Shelter> result = shelterService.getAllShelters(Pageable.unpaged());
 
         assertThat(result).isEqualTo(mockShelters);
     }

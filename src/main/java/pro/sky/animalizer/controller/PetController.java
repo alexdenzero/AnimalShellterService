@@ -1,4 +1,5 @@
 package pro.sky.animalizer.controller;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -12,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pro.sky.animalizer.model.Pet;
+import pro.sky.animalizer.model.User;
 import pro.sky.animalizer.service.PetService;
 
 import java.util.List;
@@ -22,7 +24,6 @@ public class PetController {
 
     private final PetService petService;
 
-    @Autowired
     public PetController(PetService petService) {
         this.petService = petService;
     }
@@ -40,9 +41,9 @@ public class PetController {
                             }
                     )
             })
-    @GetMapping("/{pets}")
-    public List<Pet> getAllPets() {
-        return petService.getAllPet();
+    @GetMapping("/pets")
+    public Page<Pet> getAllPets(@RequestParam Pageable pageable) {
+        return (Page<Pet>) petService.getAllPet(pageable);
     }
 
     @Operation(
@@ -62,7 +63,7 @@ public class PetController {
                             description = "Питомца с переданным id не существует"
                     )
             })
-    @GetMapping("/{id}")
+    @GetMapping("/id")
     public Pet findPetById(@PathVariable Long id) {
         return petService.getPetById(id);
     }
