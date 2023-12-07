@@ -44,7 +44,7 @@ public class ShelterController {
             })
     @GetMapping("/shelters")
     public Page<Shelter> getAllShelters(@RequestParam Pageable pageable) {
-        return (Page<Shelter>) service.getAllShelters(pageable);
+        return service.getAllShelters(pageable);
     }
 
     @Operation(

@@ -43,9 +43,9 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
     private final Logger logger = LoggerFactory.getLogger(TelegramBotUpdatesListener.class);
     private final MenuUtil menuUtil;
     private static ButtonType buttonType;
-    int pageNumber = 0; // Номер страницы (0 - первая страница)
-    int pageSize = 10; // Размер страницы (сколько элементов на странице)
-    Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("someField"));
+    private final int pageNumber = 0; // Номер страницы (0 - первая страница)
+    private final int pageSize = 10; // Размер страницы (сколько элементов на странице)
+    Pageable pageable = PageRequest.of(pageNumber, pageSize);
 
 
     public TelegramBotUpdatesListener(TelegramBot telegramBot, UserService userService, ShelterService shelterService, MenuUtil menuUtil) {

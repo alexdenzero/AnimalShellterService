@@ -43,7 +43,7 @@ public class PetController {
             })
     @GetMapping("/pets")
     public Page<Pet> getAllPets(@RequestParam Pageable pageable) {
-        return (Page<Pet>) petService.getAllPet(pageable);
+        return petService.getAllPet(pageable);
     }
 
     @Operation(
@@ -63,7 +63,7 @@ public class PetController {
                             description = "Питомца с переданным id не существует"
                     )
             })
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public Pet findPetById(@PathVariable Long id) {
         return petService.getPetById(id);
     }

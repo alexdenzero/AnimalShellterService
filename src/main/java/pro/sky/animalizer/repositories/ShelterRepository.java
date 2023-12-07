@@ -10,5 +10,4 @@ import pro.sky.animalizer.model.User;
  * Интерфейс - репозиторий для работы с сущностью Shelter.
  */
 public interface ShelterRepository extends JpaRepository<Shelter, Long> {
-    Page<Shelter> findAll(Pageable pageable);
 }
