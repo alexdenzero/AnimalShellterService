@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pro.sky.animalizer.exceptions.UserNotFoundException;
+import pro.sky.animalizer.model.Shelter;
 import pro.sky.animalizer.model.User;
 import pro.sky.animalizer.repositories.UserRepository;
 

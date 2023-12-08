@@ -10,6 +10,9 @@ import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.response.SendResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import pro.sky.animalizer.exceptions.ShelterNotFoundException;
 import pro.sky.animalizer.model.ButtonType;
@@ -26,8 +29,6 @@ import java.util.regex.Pattern;
 
 import pro.sky.animalizer.util.MenuUtil;
 
-import static pro.sky.animalizer.model.ButtonType.*;
-
 /**
  * Класс, уведомляемый о событии. <br>
  * Он должен быть зарегистрирован источником событий
@@ -42,6 +43,9 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
     private final Logger logger = LoggerFactory.getLogger(TelegramBotUpdatesListener.class);
     private final MenuUtil menuUtil;
     private static ButtonType buttonType;
+    private final int pageNumber = 0; // Номер страницы (0 - первая страница)
+    private final int pageSize = 10; // Размер страницы (сколько элементов на странице)
+    Pageable pageable = PageRequest.of(pageNumber, pageSize);
 
 
     public TelegramBotUpdatesListener(TelegramBot telegramBot, UserService userService, ShelterService shelterService, MenuUtil menuUtil) {
@@ -97,11 +101,11 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
         if (callbackQuery != null) {
             long chatId = callbackQuery.message().chat().id();
             String data = callbackQuery.data();
-            Shelter catsShelter = shelterService.getAllShelters().stream()
+            Shelter catsShelter = shelterService.getAllShelters(pageable).stream()
                     .filter(shelter -> shelter.getShelterType().equals(ShelterType.CATS_SHELTER))
                     .findFirst()
                     .orElseThrow(ShelterNotFoundException::new);
-            Shelter dogsShelter = shelterService.getAllShelters().stream()
+            Shelter dogsShelter = shelterService.getAllShelters(pageable).stream()
                     .filter(shelter -> shelter.getShelterType().equals(ShelterType.DOGS_SHELTER))
                     .findFirst()
                     .orElseThrow(ShelterNotFoundException::new);

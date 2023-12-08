@@ -43,9 +43,9 @@ public class UserController {
                             }
                     )
             })
-    @GetMapping("/{users}")
+    @GetMapping("/users")
     public Page<User> getAllUsers(@RequestParam Pageable pageable) {
-        return (Page<User>) userService.getAllUsers(pageable);
+        return userService.getAllUsers(pageable);
     }
 
     @Operation(
